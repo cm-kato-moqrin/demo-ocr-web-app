@@ -1,0 +1,36 @@
+{
+  "name": "frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "deploy": "npm run build && aws s3 sync ./dist s3://${S3_BUCKET_NAME} --exclude *.html --delete && aws s3 sync ./dist s3://${S3_BUCKET_NAME} --exclude '*' --include *.html --content-type 'text/html; charset=UTF-8' && aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths '/*'",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "tailwindcss": "tailwindcss"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-webcam": "7.2.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.15.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/react-webcam": "1.1.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "10.4.20",
+    "eslint": "^9.15.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.14",
+    "globals": "^15.12.0",
+    "postcss": "8.4.49",
+    "tailwindcss": "3.4.16",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.15.0",
+    "vite": "^6.0.1"
+  }
+}
